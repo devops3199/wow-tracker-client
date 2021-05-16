@@ -11,7 +11,7 @@ export function useAuth() {
 
 export default function AuthProvider({ children } : { children : React.ReactNode }) {
 
-    const [currentUser, setCurrentUser] = React.useState<firebase.User | null>(null);
+    const [currentUser, setCurrentUser] = React.useState<firebase.User | null>();
     const [loading, setLoading] = React.useState<boolean>(false);
 
     function register(email : string, password : string) {
@@ -36,7 +36,6 @@ export default function AuthProvider({ children } : { children : React.ReactNode
 
     React.useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
-            console.log(user, 'Login')
             setCurrentUser(user);
             setLoading(false);
         });
