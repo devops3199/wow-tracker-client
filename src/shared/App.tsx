@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Register, Login, Main, FindPassword } from 'pages/pages';
+import { Register, Login, Main, FindPassword, AddData } from 'pages/pages';
 import { Header, PrivateRoute } from 'components/components';
 import AuthProvider from 'contexts/AuthProvider';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -14,9 +14,10 @@ export default function App() {
           <div>
               <Switch>
                 <PrivateRoute exact path="/" component={ Main } />
-                <Route path="/register" component={ Register } />
-                <Route path="/login" component={ Login } />
-                <Route path="/findpassword" component={ FindPassword } />
+                <PrivateRoute exact path="/add" component={ AddData } />
+                <Route exact path="/register" component={ Register } />
+                <Route exact path="/login" component={ Login } />
+                <Route exact path="/findpassword" component={ FindPassword } />
               </Switch>
           </div>
         </AuthProvider>

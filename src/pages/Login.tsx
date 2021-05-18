@@ -23,6 +23,7 @@ export default function Login() {
             setLoading(true);
             const result = await login(email.current?.value, password.current?.value);
             logging.info(result);
+            alert('환영하네 용사여');
             history.push("/");
         } catch (e) {
             setError('로그인을 실패했습니다.');
@@ -32,7 +33,7 @@ export default function Login() {
 
     async function socialLogin() {
         const result = await githubLogin();
-        logging.info(result);
+        history.push("/");
     }
 
     return (

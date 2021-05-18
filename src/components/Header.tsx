@@ -6,10 +6,11 @@ import { useAuth } from 'contexts/AuthProvider';
 import logo from 'media/wow.png';
 
 export default function Header() {
-    const { logout } = useAuth();
+    const { logout, currentUser } = useAuth();
 
     function handgleLogout() {
         logout();
+        alert('잘가게 용사여');
     }
 
     return (
@@ -19,7 +20,7 @@ export default function Header() {
                 <span><Link to='/'>메인</Link></span>
                 <span><Link to='/add'>등록</Link></span>
                 <span><Link to='/login'>로그인</Link></span>
-                <span onClick={handgleLogout}>로그아웃</span>
+                { currentUser ? (<Logout onClick={handgleLogout}>로그아웃</Logout>) : (<></>) }
             </Menu>
         </HeaderContainer>
     );
@@ -42,4 +43,12 @@ const Menu = styled.div`
         margin: 0 1rem;
         pointer: cursor;
     }
+`;
+
+const Logout = styled.span`
+    padding: .5rem 1rem;
+    background-color: tomato;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
 `;
