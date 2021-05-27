@@ -17,8 +17,8 @@ export default function AddData() {
             date : date.current?.value,
             begin_time : begin_time.current?.value,
             end_time : end_time.current?.value,
-            dun : dun.current?.value,
-            raid : raid.current?.value
+            dun : Number(dun.current?.value),
+            raid : Number(raid.current?.value)
         };
 
         wowDB.add({ ...data })
