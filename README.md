@@ -18,6 +18,7 @@
 ###	:pushpin: 기능
 + 플레이 시간 시각화
 <img src="./src/media/chartjs.PNG"/>
+
 + 로그인/깃허브 로그인/회원가입/비밀번호 찾기
 + 인증 Custom Hook 개발
 ```Javascript
