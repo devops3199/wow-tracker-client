@@ -6,9 +6,10 @@ export default function BarLineChart({ RecordsArr, title } : Records) {
 
     const labels = RecordsArr.map((val) => val.date);
     const hours = RecordsArr.map((val) => {
-        const begin = val.begin_time.split(':');
-        const end = val.end_time.split(':');
-        return Number(end[0]) - Number(begin[0]);
+        const begin = val.begin_time.replace(':', '');
+        const end = val.end_time.replace(':', '');
+        const result = (Number(end) - Number(begin)) / 60;
+        return result;
     })
 
     return (
