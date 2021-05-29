@@ -3,15 +3,23 @@ import { Bar } from 'react-chartjs-2';
 import { Records } from 'interfaces/Global';
 
 export default function BarLineChart({ RecordsArr, title } : Records) {
-
     const labels = RecordsArr.map((val) => val.date);
+
+    const dun = RecordsArr.map((val) => {
+        return val.dun;
+    });
+
+    const raid = RecordsArr.map((val) => {
+        return val.raid;
+    });
+
     const hours = RecordsArr.map((val) => {
         const begin = val.begin_time.replace(':', '');
         const end = val.end_time.replace(':', '');
         const result = (Number(end) - Number(begin)) / 60;
         return result;
-    })
-
+    });
+    
     return (
         <div>
             <Bar
@@ -20,7 +28,7 @@ export default function BarLineChart({ RecordsArr, title } : Records) {
                     labels: labels,
                     datasets: [{
                         label: title,
-                        data: hours,
+                        data:  title === '플레이 시간' ? hours : ( title === "던전 횟수" ? dun : raid ),
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(54, 162, 235, 0.2)',

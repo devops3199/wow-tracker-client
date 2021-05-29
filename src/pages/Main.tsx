@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useAuth } from 'contexts/AuthProvider';
 import { wowDB } from 'shared/firebase';
 import { BarLineChart } from 'components/components';
 
 export default function Main() {
-    const { currentUser } = useAuth();
+    const options = ['플레이 시간', '던전 횟수', '레이드 횟수'];
     const [record, setRecord] = useState<any>([]);
+    const [filter, setFilter] = useState<string>('플레이 시간');
+
+    function handleChange(e : React.ChangeEvent<HTMLSelectElement>) {
+      setFilter(e.target.value);
+    }
 
     useEffect(() => {
       wowDB.orderBy('date','asc').get().then((docs) => {
@@ -20,12 +24,25 @@ export default function Main() {
 
     return (
       <MainContainer>
-        <h4>내가 플레이 한 시간</h4>
-        <BarLineChart RecordsArr={record} title="플레이 시간" />
+        <FilterContainer>
+          <select onChange={handleChange}>
+            {options.map((option, index) => {
+              return (<option value={option} key={index}>
+                {option}
+              </option>);
+            })}
+          </select>
+        </FilterContainer>
+        <BarLineChart RecordsArr={record} title={filter} />
       </MainContainer>
     );
 };
 
 const MainContainer = styled.div`
   width: 100%;
+`;
+
+const FilterContainer = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
 `;
