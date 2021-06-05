@@ -19,7 +19,7 @@ export default function Header() {
             <Menu>
                 <span><Link to='/'>메인</Link></span>
                 <span><Link to='/add'>등록</Link></span>
-                <span><Link to='/login'>로그인</Link></span>
+                { currentUser ? (<span> Welcome! {currentUser.email} </span>) : (<span><Link to='/login'>로그인</Link></span>) }
                 { currentUser ? (<Logout onClick={handgleLogout}>로그아웃</Logout>) : (<></>) }
             </Menu>
         </HeaderContainer>

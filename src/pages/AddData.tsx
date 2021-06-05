@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import logging from 'shared/logging';
 import { wowDB } from 'shared/firebase';
+import { useAuth } from 'contexts/AuthProvider';
 
 export default function AddData() {
     const date = useRef<HTMLInputElement>(null);
@@ -9,7 +10,8 @@ export default function AddData() {
     const end_time = useRef<HTMLInputElement>(null);
     const dun = useRef<HTMLInputElement>(null);
     const raid = useRef<HTMLInputElement>(null);
-
+    const { currentUser } = useAuth();
+    
     function handleAddData(e : React.FormEvent) {
         e.preventDefault();
 
@@ -18,7 +20,8 @@ export default function AddData() {
             begin_time : begin_time.current?.value,
             end_time : end_time.current?.value,
             dun : Number(dun.current?.value),
-            raid : Number(raid.current?.value)
+            raid : Number(raid.current?.value),
+            uid : currentUser.uid,
         };
 
         wowDB.add({ ...data })

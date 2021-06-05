@@ -2,18 +2,20 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { wowDB } from 'shared/firebase';
 import { BarLineChart } from 'components/components';
+import { useAuth } from 'contexts/AuthProvider';
 
 export default function Main() {
     const options = ['플레이 시간', '던전 횟수', '레이드 횟수'];
     const [record, setRecord] = useState<any>([]);
     const [filter, setFilter] = useState<string>('플레이 시간');
+    const { currentUser } = useAuth();
 
     function handleChange(e : React.ChangeEvent<HTMLSelectElement>) {
       setFilter(e.target.value);
     }
 
     useEffect(() => {
-      wowDB.orderBy('date','asc').get().then((docs) => {
+      wowDB.where('uid', '==', currentUser.uid).orderBy('date','asc').get().then((docs) => {
         const list:any = [];
         docs.forEach((doc) => {
           list.push({...doc.data(), id : doc.id});
