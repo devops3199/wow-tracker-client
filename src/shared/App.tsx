@@ -4,10 +4,12 @@ import { Register, Login, Main, FindPassword, AddData } from 'pages/pages';
 import { Header, PrivateRoute } from 'components/components';
 import AuthProvider from 'contexts/AuthProvider';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import GlobalStyle from 'shared/GlobalStyle';
 
 export default function App() {
   return (
     <AppContainer>
+      <GlobalStyle />
       <Router>
         <AuthProvider>
           <Header />

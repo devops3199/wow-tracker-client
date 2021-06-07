@@ -10,7 +10,8 @@ export default function Main() {
     const [record, setRecord] = useState<any>([]);
     const [filter, setFilter] = useState<string>('플레이 시간');
     const { currentUser } = useAuth();
-    const today = moment().format("MMM Do YY"); 
+    const date_from = moment().startOf("week").format("YYYY-MM-DD");
+    const date_to = moment().endOf("week").format("YYYY-MM-DD");
 
     function handleChange(e : React.ChangeEvent<HTMLSelectElement>) {
       setFilter(e.target.value);
@@ -29,19 +30,14 @@ export default function Main() {
     return (
       <MainContainer>
         <DateContainer>
-          <Prev>
-            Prev
-          </Prev>
-          <DateList>
-            <li>1</li>
-            <li>2</li>
-            <li>{today}</li>
-            <li>4</li>
-            <li>5</li>
-          </DateList>
-          <Next>
-            Next
-          </Next>
+          <DateSelector>
+            <label htmlFor="from">From</label>
+            <input type="date" id="from" value={date_from} />
+          </DateSelector>
+          <DateSelector>
+            <label htmlFor="to">To</label>
+            <input type="date" id="to" value={date_to} />
+          </DateSelector>
         </DateContainer>
         <FilterContainer>
           <select onChange={handleChange}>
@@ -71,21 +67,10 @@ const DateContainer = styled.div`
   justify-content: center;
 `;
 
-const DateList = styled.ul`
-  display: contents;
+const DateSelector = styled.div`
+  margin: 0 1rem;
 
-  & li {
-    display: inline;
-    margin: 0 1.25rem;
+  & label {
+    margin: 0 1rem;
   }
-`;
-
-const Prev = styled.div`
-  cursor: pointer;
-  margin: 0 1.25rem;
-`;
-
-const Next = styled.div`
-  cursor: pointer;
-  margin: 0 1.25rem;
 `;
