@@ -17,16 +17,6 @@ export default function Main() {
       setFilter(e.target.value);
     }
 
-    function handleFilter() {
-      wowDB.where('uid', '==', currentUser.uid).orderBy('date', 'asc').startAt(dateFrom).endAt(dateTo).get().then((docs) => {
-        const list:any = [];
-        docs.forEach((doc) => {
-          list.push({...doc.data(), id : doc.id});
-        })
-        setRecord(list);
-      }).catch((err) => console.log(err, "Error"));
-    }
-
     useEffect(() => {
       wowDB.where('uid', '==', currentUser.uid).orderBy('date','asc').startAt(dateFrom).endAt(dateTo).get().then((docs) => {
         const list:any = [];
@@ -35,7 +25,7 @@ export default function Main() {
         })
         setRecord(list);
       }).catch((err) => console.log(err, "Error"));
-    }, []);
+    }, [dateFrom, dateTo]);
 
     return (
       <MainContainer>
@@ -47,9 +37,6 @@ export default function Main() {
           <DateSelector>
             <label htmlFor="to">To</label>
             <input type="date" id="to" value={dateTo} onChange={(e : React.ChangeEvent<HTMLInputElement>) => setDateTo(e.target.value)} />
-          </DateSelector>
-          <DateSelector>
-            <FilterButton onClick={handleFilter}>필터 적용</FilterButton>
           </DateSelector>
         </DateContainer>
         <FilterContainer>
