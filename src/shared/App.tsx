@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { Register, Login, Main, FindPassword, AddData } from 'pages/pages';
 import { Header, PrivateRoute } from 'components/components';

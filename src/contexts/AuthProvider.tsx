@@ -1,7 +1,6 @@
 import React from 'react';
 import firebase from 'firebase/app';
 import { auth, Provider } from 'shared/firebase';
-import logging from 'shared/logging';
 
 const AuthContext = React.createContext<any | null>(null);
 

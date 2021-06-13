@@ -26,13 +26,13 @@ export default function Login() {
             alert('환영하네 용사여');
             history.push("/");
         } catch (e) {
-            setError('로그인을 실패했습니다.');
+            setError('로그인에 실패했습니다.');
             logging.error(e);
         }
     }
 
     async function socialLogin() {
-        const result = await githubLogin();
+        await githubLogin();
         history.push("/");
     }
 

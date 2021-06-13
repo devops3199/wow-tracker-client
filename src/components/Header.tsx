@@ -1,6 +1,4 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import logging from 'shared/logging';
 import styled from 'styled-components';
 import { useAuth } from 'contexts/AuthProvider';
 import logo from 'media/wow.png';
