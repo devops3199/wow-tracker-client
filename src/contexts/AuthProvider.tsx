@@ -30,7 +30,7 @@ export default function AuthProvider({ children } : { children : React.ReactNode
     }
 
     function githubLogin() {
-        return auth.signInWithPopup(Provider.github); // Promise 객체 반환
+        return auth.signInWithPopup(Provider.github);
     }
 
     React.useEffect(() => {
