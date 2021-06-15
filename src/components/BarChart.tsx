@@ -2,7 +2,7 @@ import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Records } from 'interfaces/Global';
 
-export default function BarLineChart({ RecordsArr, title } : Records) {
+export default function BarChart({ RecordsArr, title } : Records) {
     const labels = RecordsArr.map((val) => val.date);
 
     const dun = RecordsArr.map((val) => {
@@ -49,7 +49,7 @@ export default function BarLineChart({ RecordsArr, title } : Records) {
                     }]
                 }}
                 height={400}
-                width={600}
+                width={900}
                 options={{
                     maintainAspectRatio: false
                 }}

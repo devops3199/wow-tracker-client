@@ -13,7 +13,7 @@ export default function Header() {
 
     return (
         <HeaderContainer>
-            <img src={logo} />
+            <img src={logo} alt="WoW Logo" />
             <Menu>
                 <span><Link to='/'>메인</Link></span>
                 <span><Link to='/add'>등록</Link></span>

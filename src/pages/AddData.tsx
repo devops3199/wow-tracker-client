@@ -15,6 +15,14 @@ export default function AddData() {
     function handleAddData(e : React.FormEvent) {
         e.preventDefault();
 
+        const date_from : number = Number(begin_time.current?.value?.replace(':', ''));
+        const date_to : number = Number(end_time.current?.value?.replace(':', ''));
+
+        if(date_from > date_to) {
+            alert("시작 시간이 종료 시간보다 큽니다.");
+            return;
+        }
+
         const data = {
             date : date.current?.value,
             begin_time : begin_time.current?.value,

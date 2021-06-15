@@ -1,6 +1,6 @@
 import Header from 'components/Header';
 import PrivateRoute from 'components/PrivateRoute';
-import BarLineChart from 'components/BarLineChart';
+import BarChart from 'components/BarChart';
 
 
-export { Header, PrivateRoute, BarLineChart };
+export { Header, PrivateRoute, BarChart };

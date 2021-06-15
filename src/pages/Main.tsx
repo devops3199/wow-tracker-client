@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { wowDB } from 'shared/firebase';
-import { BarLineChart } from 'components/components';
+import { BarChart } from 'components/components';
 import { useAuth } from 'contexts/AuthProvider';
 import moment from 'moment';
 
@@ -25,7 +25,7 @@ export default function Main() {
         })
         setRecord(list);
       }).catch((err) => console.log(err, "Error"));
-    }, [dateFrom, dateTo]);
+    }, [dateFrom, dateTo, currentUser.uid]);
 
     return (
       <MainContainer>
@@ -48,7 +48,7 @@ export default function Main() {
             })}
           </select>
         </FilterContainer>
-        <BarLineChart RecordsArr={record} title={filter} />
+        {record.length === 0 ? (<DataNone><span>데이터가 없습니다.</span></DataNone>) : (<BarChart RecordsArr={record} title={filter} />)}
       </MainContainer>
     );
 };
@@ -60,6 +60,7 @@ const MainContainer = styled.div`
 const FilterContainer = styled.div`
   display: flex;
   flex-direction: row-reverse;
+  margin: .5rem 0;
 `;
 
 const DateContainer = styled.div`
@@ -75,6 +76,11 @@ const DateSelector = styled.div`
   }
 `;
 
-const FilterButton = styled.button`
-
+const DataNone = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 900px;
+  height: 400px;
+  border: 1px solid #d2d2d2;
 `;
