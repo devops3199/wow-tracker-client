@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import logging from 'shared/logging';
 import { wowDB } from 'shared/firebase';
 import { useAuth } from 'contexts/AuthProvider';
+import { Record } from 'interfaces/Global';
 
 export default function AddData() {
     const date = useRef<HTMLInputElement>(null);
@@ -23,10 +24,10 @@ export default function AddData() {
             return;
         }
 
-        const data = {
-            date : date.current?.value,
-            begin_time : begin_time.current?.value,
-            end_time : end_time.current?.value,
+        const data : Record = {
+            date : date.current?.value || '',
+            begin_time : begin_time.current?.value || '',
+            end_time : end_time.current?.value || '',
             dun : Number(dun.current?.value),
             raid : Number(raid.current?.value),
             uid : currentUser.uid,
@@ -60,11 +61,11 @@ export default function AddData() {
                 </InputWrapper>
                 <InputWrapper>
                     <label htmlFor="dun">던전 횟수</label>
-                    <input type="number" ref={dun} name="dun" min="0" max="10" required />
+                    <input type="number" ref={dun} name="dun" min="0" max="20" required />
                 </InputWrapper>
                 <InputWrapper>
                     <label htmlFor="raid">레이드 횟수</label>
-                    <input type="number" ref={raid} name="raid" min="0" max="10" required />
+                    <input type="number" ref={raid} name="raid" min="0" max="20" required />
                 </InputWrapper>
                 <ButtonWrapper>
                     <button>
@@ -90,6 +91,17 @@ const InputWrapper = styled.div`
     flex-direction: column;
     width: 600px;
     margin: 1.5rem auto;
+
+    & label {
+        margin: .5rem 0;
+    }
+
+    & input {
+        padding: .75rem 1rem;
+        border: 1px solid #FFCD4A;
+        border-radius: 5px;
+        outline: none;
+    }
 `;
 
 const ButtonWrapper = styled.div`

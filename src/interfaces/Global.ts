@@ -4,6 +4,7 @@ export interface Record {
     date : string,
     dun : number,
     raid : number,
+    uid : string,
 }
 
 export interface Records {
