@@ -4,6 +4,7 @@ import { wowDB } from 'shared/firebase';
 import { BarChart } from 'components/components';
 import { useAuth } from 'contexts/AuthProvider';
 import moment from 'moment';
+import { Strategy } from 'passport-bnet';
 
 export default function Main() {
     const options = ['플레이 시간', '던전 횟수', '레이드 횟수'];

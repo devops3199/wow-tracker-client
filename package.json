@@ -15,6 +15,7 @@
     "chart.js": "^3.3.0",
     "firebase": "^8.6.1",
     "moment": "^2.29.1",
+    "passport-bnet": "^2.0.0",
     "react": "^17.0.2",
     "react-chartjs-2": "^3.0.3",
     "react-dom": "^17.0.2",
@@ -47,5 +48,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/passport-bnet": "^2.0.1"
   }
 }
