@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { useAuth } from 'contexts/AuthProvider';
 import logging from 'shared/logging';
 import styled from 'styled-components';
 
 export default function Login() {
-    const [loading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string>('');
-
-    const email = React.useRef<HTMLInputElement>(null);
-    const password = React.useRef<HTMLInputElement>(null);
-
     const history = useHistory();
-    const { login, githubLogin } = useAuth();
+
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     async function handleLogin(e : React.FormEvent) {
         e.preventDefault();
@@ -21,8 +18,8 @@ export default function Login() {
         try {
             setError('');
             setLoading(true);
-            const result = await login(email.current?.value, password.current?.value);
-            logging.info(result);
+            // const result = await login(email.current?.value, password.current?.value);
+            // logging.info(result);
             alert('환영하네 용사여');
             history.push("/");
         } catch (e) {
@@ -32,18 +29,17 @@ export default function Login() {
     }
 
     async function socialLogin() {
-        await githubLogin();
-        history.push("/");
+        // TODO: Github
     }
 
     return (
         <LoginContainer>
             <LoginForm onSubmit={handleLogin}>
                 <InputWrapper>
-                    <input type="email" placeholder="이메일" ref={email} required />
+                    <input type="email" placeholder="이메일" onChange={(e) => setEmail(e.target.value)} required />
                 </InputWrapper>
                 <InputWrapper>
-                    <input type="password" placeholder="비밀번호" ref={password} required />
+                    <input type="password" placeholder="비밀번호" onChange={(e) => setPassword(e.target.value)} required />
                 </InputWrapper>
                 <ButtonWrapper>
                     <button disabled={loading}>
