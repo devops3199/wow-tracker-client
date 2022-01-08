@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthProvider';
 import logging from 'shared/logging';
 import styled from 'styled-components';
 
 export default function Login() {
     const history = useHistory();
+    const { login, githubLogin } = useAuth();
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -18,8 +20,8 @@ export default function Login() {
         try {
             setError('');
             setLoading(true);
-            // const result = await login(email.current?.value, password.current?.value);
-            // logging.info(result);
+            const result = await login(email, password);
+            logging.info(result);
             alert('환영하네 용사여');
             history.push("/");
         } catch (e) {
@@ -29,7 +31,8 @@ export default function Login() {
     }
 
     async function socialLogin() {
-        // TODO: Github
+        await githubLogin();
+        history.push("/");
     }
 
     return (
