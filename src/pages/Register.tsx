@@ -5,27 +5,28 @@ import styled from 'styled-components';
 import { useAuth } from 'contexts/AuthProvider';
 
 export default function Register() {
-    const [loading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string>('');
-
-    const email = React.useRef<HTMLInputElement>(null);
-    const password = React.useRef<HTMLInputElement>(null);
-    const confirm = React.useRef<HTMLInputElement>(null);
-
     const history = useHistory();
     const { register } = useAuth();
 
-    async function handgleRegister(e : React.FormEvent) {
+
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [passwordConfirm, setPasswordConfirm] = useState('');
+
+    async function handleRegister(e : React.FormEvent) {
         e.preventDefault();
 
-        if(password.current?.value !== confirm.current?.value) {
+        if(password !== passwordConfirm) {
             return setError('비밀번호가 다릅니다.');
         }
 
         try {
             setError('');
             setLoading(true);
-            await register(email.current?.value, password.current?.value);
+            await register(email, password);
             history.push("/login");
         } catch (e) {
             setError('가입에 실패했습니다.');
@@ -35,15 +36,15 @@ export default function Register() {
 
     return (
         <RegisterContainer>
-            <RegisterForm onSubmit={handgleRegister}>
+            <RegisterForm onSubmit={handleRegister}>
                 <InputWrapper>
-                    <input type="email" placeholder="이메일" ref={email} required />
+                    <input type="email" placeholder="이메일" onChange={(e) => setEmail(e.target.value)} required />
                 </InputWrapper>
                 <InputWrapper>
-                    <input type="password" placeholder="비밀번호" ref={password} required />
+                    <input type="password" placeholder="비밀번호" onChange={(e) => setPassword(e.target.value)} required />
                 </InputWrapper>
                 <InputWrapper>
-                    <input type="password" placeholder="비밀번호 확인" ref={confirm} required />
+                    <input type="password" placeholder="비밀번호 확인"onChange={(e) => setPasswordConfirm(e.target.value)} required />
                 </InputWrapper>
                 <ButtonWrapper>
                     <button disabled={loading}>

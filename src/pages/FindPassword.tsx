@@ -1,17 +1,16 @@
-import { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import logging from 'shared/logging';
 import styled from 'styled-components';
 import { useAuth } from 'contexts/AuthProvider';
 
 export default function FindPassword() {
-    const [loading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string>('');
-
-    const email = useRef<HTMLInputElement>(null);
-
     const history = useHistory();
     const { resetPassword } = useAuth();
+    
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+    const [email, setEmail] = useState('');
 
     async function handleFindPassword() {
         logging.info('비밀번호 찾기');
@@ -19,7 +18,7 @@ export default function FindPassword() {
         try {
             setError('');
             setLoading(true);
-            await resetPassword(email.current?.value);
+            await resetPassword(email);
             history.push("/login");
             alert('이메일을 확인 해주세요.');
         } catch (e) {
@@ -34,7 +33,7 @@ export default function FindPassword() {
         <PasswordContainer>
             <PasswordForm onSubmit={handleFindPassword}>
                 <InputWrapper>
-                    <input type="email" placeholder="이메일" ref={email} required />
+                    <input type="email" placeholder="이메일" onChange={(e) => setEmail(e.target.value)} required />
                 </InputWrapper>
                 <ButtonWrapper>
                     <button disabled={loading}>

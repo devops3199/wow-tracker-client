@@ -5,6 +5,7 @@ import { wowDB } from 'shared/firebase';
 import { useAuth } from 'contexts/AuthProvider';
 import { Record } from 'interfaces/Global';
 
+// FIXME: Remove page
 export default function AddData() {
     const date = useRef<HTMLInputElement>(null);
     const begin_time = useRef<HTMLInputElement>(null);
