@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import logging from 'shared/logging';
 import styled from 'styled-components';
-import { useAuth } from 'contexts/AuthProvider';
+import * as moment from 'moment';
+import { httpClient } from '../libs/http-client';
 
 export default function Register() {
     const history = useHistory();
-    const { register } = useAuth();
-
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
     const [email, setEmail] = useState('');
+    const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
 
@@ -26,7 +26,8 @@ export default function Register() {
         try {
             setError('');
             setLoading(true);
-            await register(email, password);
+            await httpClient.post('/api/user/register', { email, name, password, createdAt: new Date(moment.utc().format('YYYY-MM-DD HH:mm:ss')) });
+            setLoading(false);
             history.push("/login");
         } catch (e) {
             setError('가입에 실패했습니다.');
@@ -39,6 +40,9 @@ export default function Register() {
             <RegisterForm onSubmit={handleRegister}>
                 <InputWrapper>
                     <input type="email" placeholder="이메일" onChange={(e) => setEmail(e.target.value)} required />
+                </InputWrapper>
+                <InputWrapper>
+                    <input type="text" placeholder="이름" onChange={(e) => setName(e.target.value)} required />
                 </InputWrapper>
                 <InputWrapper>
                     <input type="password" placeholder="비밀번호" onChange={(e) => setPassword(e.target.value)} required />
