@@ -1,5 +1,6 @@
 import React from 'react';
 import firebase from 'firebase/app';
+import { httpClient } from '../libs/http-client';
 import { auth, Provider } from 'shared/firebase';
 
 const AuthContext = React.createContext<any | null>(null);
@@ -19,6 +20,10 @@ export default function AuthProvider({ children } : { children : React.ReactNode
 
     function login(email : string, password : string) {
         return auth.signInWithEmailAndPassword(email, password); // Promise 객체 반환
+    }
+
+    function login2(email: string, password: string) {
+        return httpClient.post<{ token: string }>('/api/user/login', { email, password });
     }
 
     function logout() {
@@ -46,6 +51,7 @@ export default function AuthProvider({ children } : { children : React.ReactNode
         currentUser,
         register,
         login,
+        login2,
         logout,
         resetPassword,
         githubLogin

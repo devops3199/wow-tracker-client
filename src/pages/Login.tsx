@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 export default function Login() {
     const history = useHistory();
-    const { login, githubLogin } = useAuth();
+    const { login2, githubLogin } = useAuth();
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -20,10 +20,11 @@ export default function Login() {
         try {
             setError('');
             setLoading(true);
-            const result = await login(email, password);
-            logging.info(result);
-            alert('환영하네 용사여');
-            history.push("/");
+            const result = await login2(email, password);
+            console.log(result);
+            // logging.info(result);
+            // alert('환영하네 용사여');
+            // history.push("/");
         } catch (e) {
             setError('로그인에 실패했습니다.');
             logging.error(e);
