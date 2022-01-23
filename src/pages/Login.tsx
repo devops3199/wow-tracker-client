@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 export default function Login() {
     const history = useHistory();
-    const { login2, githubLogin } = useAuth();
+    const { login, githubLogin } = useAuth();
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -20,7 +20,7 @@ export default function Login() {
         try {
             setError('');
             setLoading(true);
-            const result = await login2(email, password);
+            const result = await login(email, password);
             console.log(result);
             // logging.info(result);
             // alert('환영하네 용사여');

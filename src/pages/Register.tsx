@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import logging from 'shared/logging';
 import styled from 'styled-components';
-import * as moment from 'moment';
-import { httpClient } from '../libs/http-client';
 
 export default function Register() {
     const history = useHistory();
@@ -26,7 +24,7 @@ export default function Register() {
         try {
             setError('');
             setLoading(true);
-            await httpClient.post('/api/user/register', { email, name, password, createdAt: new Date(moment.utc().format('YYYY-MM-DD HH:mm:ss')) });
+            // TODO: register
             setLoading(false);
             history.push("/login");
         } catch (e) {

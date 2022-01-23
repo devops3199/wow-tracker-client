@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { createContext, useContext } from 'react';
 import firebase from 'firebase/app';
 import { httpClient } from '../libs/http-client';
 import { auth, Provider } from 'shared/firebase';
+import * as moment from 'moment';
+import { setCookie, getCookie } from '../libs/cookie';
 
-const AuthContext = React.createContext<any | null>(null);
+const AuthContext = createContext<any | null>(null);
 
 export function useAuth() {
-    return React.useContext(AuthContext);
+    return useContext(AuthContext);
 }
 
 export default function AuthProvider({ children } : { children : React.ReactNode }) {
@@ -14,16 +16,20 @@ export default function AuthProvider({ children } : { children : React.ReactNode
     const [currentUser, setCurrentUser] = React.useState<firebase.User | null>();
     const [loading, setLoading] = React.useState<boolean>(false);
 
-    function register(email : string, password : string) {
-        return auth.createUserWithEmailAndPassword(email, password); // Promise 객체 반환
+    function register(email: string, name: string, password: string) {
+        return httpClient.post('/api/user/register', { email, name, password, createdAt: new Date(moment.utc().format('YYYY-MM-DD HH:mm:ss')) });
     }
 
-    function login(email : string, password : string) {
-        return auth.signInWithEmailAndPassword(email, password); // Promise 객체 반환
+    async function login(email: string, password: string) {
+        const token = await httpClient.post<string>('/api/user/login', { email, password });
+        setCookie('token', token, 7);
+        httpClient.setAuthorization(token);
+        setUser();
     }
 
-    function login2(email: string, password: string) {
-        return httpClient.post<{ token: string }>('/api/user/login', { email, password });
+    async function setUser() {
+        const user = await httpClient.get<{ id: number; email: string; name: string; }>('/api/user/self');
+        // TODO: save to context
     }
 
     function logout() {
@@ -51,7 +57,6 @@ export default function AuthProvider({ children } : { children : React.ReactNode
         currentUser,
         register,
         login,
-        login2,
         logout,
         resetPassword,
         githubLogin
