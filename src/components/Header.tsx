@@ -6,7 +6,7 @@ import logo from 'media/wow.png';
 export default function Header() {
     const { logout, currentUser } = useAuth();
 
-    function handgleLogout() {
+    function handleLogout() {
         logout();
         alert('잘가게 용사여');
     }
@@ -18,7 +18,7 @@ export default function Header() {
                 <span><Link to='/'>메인</Link></span>
                 <span><Link to='/add'>등록</Link></span>
                 { currentUser ? (<span> Welcome! {currentUser.email} </span>) : (<span><Link to='/login'>로그인</Link></span>) }
-                { currentUser ? (<Logout onClick={handgleLogout}>로그아웃</Logout>) : (<></>) }
+                { currentUser ? (<Logout onClick={handleLogout}>로그아웃</Logout>) : (<></>) }
             </Menu>
         </HeaderContainer>
     );

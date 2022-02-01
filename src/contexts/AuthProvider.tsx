@@ -1,11 +1,15 @@
-import React, { createContext, useContext } from 'react';
-import firebase from 'firebase/app';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { httpClient } from '../libs/http-client';
-import { auth, Provider } from 'shared/firebase';
 import * as moment from 'moment';
-import { setCookie, getCookie } from '../libs/cookie';
+import { setCookie, getCookie, removeCookie } from '../libs/cookie';
 
-const AuthContext = createContext<any | null>(null);
+type User = {
+    id: number;
+    email: string;
+    name: string;
+}
+
+const AuthContext = createContext<any>(null);
 
 export function useAuth() {
     return useContext(AuthContext);
@@ -13,8 +17,8 @@ export function useAuth() {
 
 export default function AuthProvider({ children } : { children : React.ReactNode }) {
 
-    const [currentUser, setCurrentUser] = React.useState<firebase.User | null>();
-    const [loading, setLoading] = React.useState<boolean>(false);
+    const [currentUser, setCurrentUser] = useState<User>();
+    const [loading, setLoading] = useState(false);
 
     function register(email: string, name: string, password: string) {
         return httpClient.post('/api/user/register', { email, name, password, createdAt: new Date(moment.utc().format('YYYY-MM-DD HH:mm:ss')) });
@@ -29,28 +33,25 @@ export default function AuthProvider({ children } : { children : React.ReactNode
 
     async function setUser() {
         const user = await httpClient.get<{ id: number; email: string; name: string; }>('/api/user/self');
-        // TODO: save to context
+        setCurrentUser(user);
     }
 
     function logout() {
-        return auth.signOut();
+        setCurrentUser(undefined);
+        removeCookie('token');
     }
 
-    function resetPassword(email : string) {
-        return auth.sendPasswordResetEmail(email);
-    }
-
-    function githubLogin() {
-        return auth.signInWithPopup(Provider.github);
-    }
-
-    React.useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(user => {
-            setCurrentUser(user);
+    useEffect(() => {
+        setLoading(true);
+        const cookie = getCookie('token');
+        if (!cookie) {
             setLoading(false);
-        });
+            return;
+        }
+        httpClient.setAuthorization(cookie[1]);
 
-        return unsubscribe;
+        setUser();
+        setLoading(false);
     }, []);
 
     const value = {
@@ -58,8 +59,6 @@ export default function AuthProvider({ children } : { children : React.ReactNode
         register,
         login,
         logout,
-        resetPassword,
-        githubLogin
     }
 
     return (

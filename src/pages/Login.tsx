@@ -20,11 +20,9 @@ export default function Login() {
         try {
             setError('');
             setLoading(true);
-            const result = await login(email, password);
-            console.log(result);
-            // logging.info(result);
-            // alert('환영하네 용사여');
-            // history.push("/");
+            await login(email, password);
+            alert('환영하네 용사여');
+            history.push("/");
         } catch (e) {
             setError('로그인에 실패했습니다.');
             logging.error(e);

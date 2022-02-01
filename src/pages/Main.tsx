@@ -18,13 +18,7 @@ export default function Main() {
     }
 
     useEffect(() => {
-      wowDB.where('uid', '==', currentUser.uid).orderBy('date','asc').startAt(dateFrom).endAt(dateTo).get().then((docs) => {
-        const list:any = [];
-        docs.forEach((doc) => {
-          list.push({...doc.data(), id : doc.id});
-        })
-        setRecord(list);
-      }).catch((err) => console.log(err, "Error"));
+      // TODO: get Play
     }, [dateFrom, dateTo, currentUser.uid]);
 
     return (

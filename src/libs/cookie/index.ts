@@ -10,7 +10,6 @@ function setCookie(key: string, value: string, days: number) {
 }
 
 /**
- *
  * @param key
  * @returns [key, value] | undefined
  */
@@ -21,4 +20,12 @@ function getCookie(key: string) {
     ?.split("=");
 }
 
-export { setCookie, getCookie };
+/**
+ * @param key
+ * @returns void
+ */
+function removeCookie(key: string) {
+  document.cookie = key + "=;max-age=0;";
+}
+
+export { setCookie, getCookie, removeCookie };
