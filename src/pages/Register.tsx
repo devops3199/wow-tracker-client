@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useAuth } from '../contexts/AuthProvider';
 import { Link, useHistory } from 'react-router-dom';
 import logging from 'shared/logging';
 import styled from 'styled-components';
 
 export default function Register() {
     const history = useHistory();
+    const { register } = useAuth();
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -25,6 +27,7 @@ export default function Register() {
             setError('');
             setLoading(true);
             // TODO: register
+            await register(email, name, password);
             setLoading(false);
             history.push("/login");
         } catch (e) {
