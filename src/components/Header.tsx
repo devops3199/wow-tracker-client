@@ -1,14 +1,16 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAuth } from 'contexts/AuthProvider';
 import logo from 'media/wow.png';
 
 export default function Header() {
+    const history = useHistory();
     const { logout, currentUser } = useAuth();
 
     function handleLogout() {
         logout();
         alert('잘가게 용사여');
+        history.push('/login');
     }
 
     return (
@@ -17,7 +19,7 @@ export default function Header() {
             <Menu>
                 <span><Link to='/'>메인</Link></span>
                 <span><Link to='/add'>등록</Link></span>
-                { currentUser ? (<span> Welcome! {currentUser.email} </span>) : (<span><Link to='/login'>로그인</Link></span>) }
+                { currentUser ? (<span> Welcome! {currentUser.name} </span>) : (<span><Link to='/login'>로그인</Link></span>) }
                 { currentUser ? (<Logout onClick={handleLogout}>로그아웃</Logout>) : (<></>) }
             </Menu>
         </HeaderContainer>

@@ -9,20 +9,18 @@ export default function App() {
   return (
     <AppContainer>
       <GlobalStyle />
-      <Router>
-        <AuthProvider>
+      <AuthProvider>
+        <Router>
           <Header />
-          <div>
-              <Switch>
-                <PrivateRoute exact path="/" component={ Main } />
-                <PrivateRoute exact path="/add" component={ AddData } />
-                <Route exact path="/register" component={ Register } />
-                <Route exact path="/login" component={ Login } />
-                <Route exact path="/findpassword" component={ FindPassword } />
-              </Switch>
-          </div>
-        </AuthProvider>
-      </Router>
+          <Switch>
+            <PrivateRoute exact path="/" component={Main} />
+            <PrivateRoute exact path="/add" component={AddData} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/find-password" component={FindPassword} />
+          </Switch>
+        </Router>
+      </AuthProvider>
     </AppContainer>
   );
 };

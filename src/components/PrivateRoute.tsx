@@ -1,18 +1,16 @@
-import React from 'react';
+import React, { ReactFragment } from 'react';
 import { Route, Redirect, RouteProps } from 'react-router-dom';
-import { useAuth } from 'contexts/AuthProvider';
+import { getCookie } from '../libs/cookie';
 
-interface PrivateRouteProps extends RouteProps {
-    component : any
-}
+type PrivateRouteProps = RouteProps & { component: ReactFragment }
 
 export default function PrivateRoute(props : PrivateRouteProps) {
     const { component: Component, ...rest } = props;
-    const { currentUser } = useAuth();
+    const hasToken = getCookie('token');
 
     return (
         <Route {...rest} render={props => {
-            return currentUser ? <Component {...props} /> : <Redirect to='/login' />
+            return !!hasToken ? <Component {...props} /> : <Redirect to='/login' />
         }}>
             
         </Route>

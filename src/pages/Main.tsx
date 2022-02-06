@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { wowDB } from 'shared/firebase';
 import { BarChart } from 'components';
-import { useAuth } from 'contexts/AuthProvider';
 import moment from 'moment';
 
 export default function Main() {
     const options = ['플레이 시간', '던전 횟수', '레이드 횟수'];
     const [record, setRecord] = useState<any>([]);
     const [filter, setFilter] = useState<string>('플레이 시간');
-    const { currentUser } = useAuth();
     const [dateFrom, setDateFrom] = useState<string>(moment().startOf("week").format("YYYY-MM-DD"));
     const [dateTo, setDateTo] = useState<string>(moment().endOf("week").format("YYYY-MM-DD"));
 
@@ -19,7 +16,8 @@ export default function Main() {
 
     useEffect(() => {
       // TODO: get Play
-    }, [dateFrom, dateTo, currentUser.uid]);
+      setRecord([]);
+    }, []);
 
     return (
       <MainContainer>
