@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 export default function Login() {
     const history = useHistory();
-    const { login, githubLogin } = useAuth();
+    const { login } = useAuth();
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -29,11 +29,6 @@ export default function Login() {
         }
     }
 
-    async function socialLogin() {
-        await githubLogin();
-        history.push("/");
-    }
-
     return (
         <LoginContainer>
             <LoginForm onSubmit={handleLogin}>
@@ -50,11 +45,6 @@ export default function Login() {
                 </ButtonWrapper>
                 <span>{error}</span>
             </LoginForm>
-            <SocialLoginWrapper>
-                <button onClick={socialLogin}>
-                    깃허브 로그인
-                </button>
-            </SocialLoginWrapper>
             <BottomWrapper>
                 <Navigation>
                     <Link to="/register">회원가입하기</Link>
@@ -99,22 +89,6 @@ const ButtonWrapper = styled.div`
         border-radius: 5px;
         outline: none;
         cursor: pointer;
-    }
-`;
-
-const SocialLoginWrapper = styled.div`
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin: 1.5rem 0;
-    & button {
-        padding: .25rem .75rem;
-        background-color: #3c4043;
-        border: 1px solid #3c4043;
-        border-radius: 5px;
-        outline: none;
-        cursor: pointer;
-        color: #fff;
     }
 `;
 
