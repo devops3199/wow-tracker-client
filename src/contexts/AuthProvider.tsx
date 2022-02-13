@@ -44,8 +44,12 @@ export default function AuthProvider({ children } : { children : React.ReactNode
     }
 
     async function setUser() {
-        const user = await httpClient.get<{ id: number; email: string; name: string; }>('/api/user/self');
-        setCurrentUser(user);
+        try {
+            const user = await httpClient.get<{ id: number; email: string; name: string; }>('/api/user/self');
+            setCurrentUser(user);
+        } catch {
+            setCurrentUser(undefined);
+        }
     }
 
     function logout() {

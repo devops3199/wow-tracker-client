@@ -8,9 +8,9 @@ export default function Header() {
     const { logout, currentUser } = useAuth();
 
     function handleLogout() {
+        history.push('/login');
         logout();
         alert('잘가게 용사여');
-        history.push('/login');
     }
 
     return (
