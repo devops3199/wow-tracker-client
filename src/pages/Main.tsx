@@ -1,46 +1,57 @@
-import React, { useState, useEffect } from 'react';
+import React, { ChangeEvent, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { BarChart } from 'components';
 import moment from 'moment';
 
+type Record = {
+  id: number;
+  playerId: number;
+  beginAt: string;
+  endAt: string;
+  dungeonCount: number;
+  raidCount: number;
+  playAt: string;
+};
+
 export default function Main() {
     const options = ['플레이 시간', '던전 횟수', '레이드 횟수'];
-    const [record, setRecord] = useState<any>([]);
-    const [filter, setFilter] = useState<string>('플레이 시간');
-    const [dateFrom, setDateFrom] = useState<string>(moment().startOf("week").format("YYYY-MM-DD"));
-    const [dateTo, setDateTo] = useState<string>(moment().endOf("week").format("YYYY-MM-DD"));
-
-    function handleChange(e : React.ChangeEvent<HTMLSelectElement>) {
-      setFilter(e.target.value);
-    }
+    const [record, setRecord] = useState<Record[]>([]);
+    const [filter, setFilter] = useState('플레이 시간');
+    const [dateFrom, setDateFrom] = useState(moment().startOf("week").format("YYYY-MM-DD"));
+    const [dateTo, setDateTo] = useState(moment().endOf("week").format("YYYY-MM-DD"));
 
     useEffect(() => {
       // TODO: get Play
       setRecord([]);
     }, []);
 
+    function handleSelectChange(e: ChangeEvent<HTMLSelectElement>) {
+      setFilter(e.target.value);
+    }
+
     return (
       <MainContainer>
         <DateContainer>
           <DateSelector>
             <label htmlFor="from">From</label>
-            <input type="date" id="from" value={dateFrom} onChange={(e : React.ChangeEvent<HTMLInputElement>) => setDateFrom(e.target.value)} />
+            <input type="date" id="from" value={dateFrom} onChange={(e: ChangeEvent<HTMLInputElement>) => setDateFrom(e.target.value)} />
           </DateSelector>
           <DateSelector>
             <label htmlFor="to">To</label>
-            <input type="date" id="to" value={dateTo} onChange={(e : React.ChangeEvent<HTMLInputElement>) => setDateTo(e.target.value)} />
+            <input type="date" id="to" value={dateTo} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDateTo(e.target.value)} />
           </DateSelector>
         </DateContainer>
         <FilterContainer>
-          <select onChange={handleChange}>
+          <select onChange={handleSelectChange}>
             {options.map((option, index) => {
-              return (<option value={option} key={index}>
+              return (
+              <option value={option} key={index.toString()}>
                 {option}
               </option>);
             })}
           </select>
         </FilterContainer>
-        {record.length === 0 ? (<DataNone><span>데이터가 없습니다.</span></DataNone>) : (<BarChart RecordsArr={record} title={filter} />)}
+        {record.length === 0 ? (<DataNone><span>데이터가 없습니다.</span></DataNone>) : (<BarChart data={record} title={filter} />)}
       </MainContainer>
     );
 };

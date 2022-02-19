@@ -1,21 +1,23 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
-import { Records } from 'interfaces/Global';
+import { Record } from 'types';
 
-export default function BarChart({ RecordsArr, title } : Records) {
-    const labels = RecordsArr.map((val) => val.date);
+export default function BarChart(props: { data: Record[]; title: string }) {
+    const { data, title } = props;
 
-    const dun = RecordsArr.map((val) => {
-        return val.dun;
+    const playAt = data.map((val) => val.playAt);
+
+    const dun = data.map((val) => {
+        return val.dungeonCount;
     });
 
-    const raid = RecordsArr.map((val) => {
-        return val.raid;
+    const raid = data.map((val) => {
+        return val.raidCount;
     });
 
-    const hours = RecordsArr.map((val) => {
-        const begin = val.begin_time.replace(':', '');
-        const end = val.end_time.replace(':', '');
+    const hours = data.map((val) => {
+        const begin = val.beginAt.replace(':', '');
+        const end = val.endAt.replace(':', '');
         const result = (Number(end) - Number(begin)) / 60;
         return result;
     });
@@ -25,7 +27,7 @@ export default function BarChart({ RecordsArr, title } : Records) {
             <Bar
                 type="bar"
                 data={{
-                    labels: labels,
+                    labels: playAt,
                     datasets: [{
                         label: title,
                         data:  title === '플레이 시간' ? hours : ( title === "던전 횟수" ? dun : raid ),

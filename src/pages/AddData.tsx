@@ -1,37 +1,37 @@
-import React, { useRef } from 'react';
+import React, { useRef, FormEvent } from 'react';
 import styled from 'styled-components';
 import logging from 'shared/logging';
 import { wowDB } from 'shared/firebase';
 import { useAuth } from 'contexts/AuthProvider';
-import { Record } from 'interfaces/Global';
 
 // FIXME: Remove page
 export default function AddData() {
+    const { currentUser } = useAuth();
+
     const date = useRef<HTMLInputElement>(null);
     const begin_time = useRef<HTMLInputElement>(null);
     const end_time = useRef<HTMLInputElement>(null);
     const dun = useRef<HTMLInputElement>(null);
     const raid = useRef<HTMLInputElement>(null);
-    const { currentUser } = useAuth();
     
-    function handleAddData(e : React.FormEvent) {
+    function handleAddData(e: FormEvent) {
         e.preventDefault();
 
-        const date_from : number = Number(begin_time.current?.value?.replace(':', ''));
-        const date_to : number = Number(end_time.current?.value?.replace(':', ''));
+        const date_from = Number(begin_time.current?.value?.replace(':', ''));
+        const date_to = Number(end_time.current?.value?.replace(':', ''));
 
         if(date_from > date_to) {
             alert("시작 시간이 종료 시간보다 큽니다.");
             return;
         }
 
-        const data : Record = {
-            date : date.current?.value || '',
-            begin_time : begin_time.current?.value || '',
-            end_time : end_time.current?.value || '',
-            dun : Number(dun.current?.value),
-            raid : Number(raid.current?.value),
-            uid : currentUser.uid,
+        const data = {
+            date: date.current?.value || '',
+            begin_time: begin_time.current?.value || '',
+            end_time: end_time.current?.value || '',
+            dun: Number(dun.current?.value),
+            raid: Number(raid.current?.value),
+            uid: currentUser?.id,
         };
 
         wowDB.add({ ...data })
