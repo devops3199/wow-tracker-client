@@ -9,7 +9,16 @@ type User = {
     name: string;
 }
 
-const AuthContext = createContext<any>(null);
+const AuthContext = createContext<{ currentUser?: User; register: (email: string, name: string, password: string) => Promise<void>; login: (email: string, password: string) => Promise<void>; logout: () => void }>({
+    currentUser: undefined,
+    register: async (email: string, name: string, password: string) => {
+        await new Promise<void>(resolve => resolve());
+    },
+    login: async (email: string, password: string) => {
+        await new Promise<void>(resolve => resolve());
+    },
+    logout: () => ({})
+});
 
 export function useAuth() {
     return useContext(AuthContext);
@@ -32,8 +41,8 @@ export default function AuthProvider({ children } : { children : React.ReactNode
         setLoading(false);
     }, []);
 
-    function register(email: string, name: string, password: string) {
-        return httpClient.post('/api/user/register', { email, name, password, createdAt: new Date(moment.utc().format('YYYY-MM-DD HH:mm:ss')) });
+    async function register(email: string, name: string, password: string) {
+        await httpClient.post('/api/user/register', { email, name, password, createdAt: new Date(moment.utc().format('YYYY-MM-DD HH:mm:ss')) });
     }
 
     async function login(email: string, password: string) {
