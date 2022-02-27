@@ -1,15 +1,15 @@
 import React from 'react';
-import { AuthContext } from './libs';
+import { AuthProvider } from './libs';
 import { Box } from '@mui/material';
 import { Navbar } from './components';
 
 function App() {
   return (
-    <AuthContext>
+    <AuthProvider>
       <Box>
         <Navbar />
       </Box>
-    </AuthContext>
+    </AuthProvider>
 
   );
 }
