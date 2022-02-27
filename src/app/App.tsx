@@ -13,7 +13,7 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Main />} />
-            <Route path="/123" element={<NotFound />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Router>
       </Box>
