@@ -1,12 +1,16 @@
 import React from 'react';
+import { AuthContext } from './libs';
 import { Box } from '@mui/material';
 import { Navbar } from './components';
 
 function App() {
   return (
-    <Box>
-      <Navbar />
-    </Box>
+    <AuthContext>
+      <Box>
+        <Navbar />
+      </Box>
+    </AuthContext>
+
   );
 }
 

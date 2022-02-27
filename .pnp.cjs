@@ -41,6 +41,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@mui/icons-material", "virtual:cfc3bdaab13e57dc6a358dda48c5451122c4a90c7dd0c6d7e2609b42e5d15c94833346ac41895d1a5f78c05148bc8ca3699e571451a84efa365da17bbf6e3380#npm:5.4.2"],\
             ["@mui/material", "virtual:cfc3bdaab13e57dc6a358dda48c5451122c4a90c7dd0c6d7e2609b42e5d15c94833346ac41895d1a5f78c05148bc8ca3699e571451a84efa365da17bbf6e3380#npm:5.4.3"],\
             ["@yarnpkg/pnpify", "npm:3.1.1"],\
+            ["axios", "npm:0.26.0"],\
             ["babel-loader", "virtual:cfc3bdaab13e57dc6a358dda48c5451122c4a90c7dd0c6d7e2609b42e5d15c94833346ac41895d1a5f78c05148bc8ca3699e571451a84efa365da17bbf6e3380#npm:8.2.3"],\
             ["css-loader", "virtual:cfc3bdaab13e57dc6a358dda48c5451122c4a90c7dd0c6d7e2609b42e5d15c94833346ac41895d1a5f78c05148bc8ca3699e571451a84efa365da17bbf6e3380#npm:6.6.0"],\
             ["eslint-config-prettier", "virtual:cfc3bdaab13e57dc6a358dda48c5451122c4a90c7dd0c6d7e2609b42e5d15c94833346ac41895d1a5f78c05148bc8ca3699e571451a84efa365da17bbf6e3380#npm:8.4.0"],\
@@ -3977,6 +3978,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["axios", [\
+        ["npm:0.26.0", {\
+          "packageLocation": "./.yarn/cache/axios-npm-0.26.0-ae9d5291c9-d7a8b898f4.zip/node_modules/axios/",\
+          "packageDependencies": [\
+            ["axios", "npm:0.26.0"],\
+            ["follow-redirects", "virtual:ae9d5291c97ae0cacb5775381cccfce07fa49ffc443f3fdd7488fb1a1655b5d1c7927e5118e33808de5d3fd89b9e27b3eadf3d56f2cf83b8ab953c0679aed818#npm:1.14.9"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["babel-loader", [\
         ["npm:8.2.3", {\
           "packageLocation": "./.yarn/cache/babel-loader-npm-8.2.3-855681b984-78e1e1a919.zip/node_modules/babel-loader/",\
@@ -5638,10 +5649,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:a313c479c5c7e54d9ec8fbeeea69ff640f56b8989ea2dff42351a3fa5c4061fb80a52d8ede0f0826a181a216820c2d2c3f15da881e7fdf31cef1c446e42f0c45#npm:1.14.9", {\
-          "packageLocation": "./.yarn/__virtual__/follow-redirects-virtual-0b008d299e/0/cache/follow-redirects-npm-1.14.9-522f191631-f5982e0eb4.zip/node_modules/follow-redirects/",\
+        ["virtual:ae9d5291c97ae0cacb5775381cccfce07fa49ffc443f3fdd7488fb1a1655b5d1c7927e5118e33808de5d3fd89b9e27b3eadf3d56f2cf83b8ab953c0679aed818#npm:1.14.9", {\
+          "packageLocation": "./.yarn/__virtual__/follow-redirects-virtual-0541b7cf28/0/cache/follow-redirects-npm-1.14.9-522f191631-f5982e0eb4.zip/node_modules/follow-redirects/",\
           "packageDependencies": [\
-            ["follow-redirects", "virtual:a313c479c5c7e54d9ec8fbeeea69ff640f56b8989ea2dff42351a3fa5c4061fb80a52d8ede0f0826a181a216820c2d2c3f15da881e7fdf31cef1c446e42f0c45#npm:1.14.9"],\
+            ["follow-redirects", "virtual:ae9d5291c97ae0cacb5775381cccfce07fa49ffc443f3fdd7488fb1a1655b5d1c7927e5118e33808de5d3fd89b9e27b3eadf3d56f2cf83b8ab953c0679aed818#npm:1.14.9"],\
             ["@types/debug", null],\
             ["debug", null]\
           ],\
@@ -6087,7 +6098,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["http-proxy", "npm:1.18.1"],\
             ["eventemitter3", "npm:4.0.7"],\
-            ["follow-redirects", "virtual:a313c479c5c7e54d9ec8fbeeea69ff640f56b8989ea2dff42351a3fa5c4061fb80a52d8ede0f0826a181a216820c2d2c3f15da881e7fdf31cef1c446e42f0c45#npm:1.14.9"],\
+            ["follow-redirects", "virtual:ae9d5291c97ae0cacb5775381cccfce07fa49ffc443f3fdd7488fb1a1655b5d1c7927e5118e33808de5d3fd89b9e27b3eadf3d56f2cf83b8ab953c0679aed818#npm:1.14.9"],\
             ["requires-port", "npm:1.0.0"]\
           ],\
           "linkType": "HARD"\
@@ -9458,6 +9469,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@mui/icons-material", "virtual:cfc3bdaab13e57dc6a358dda48c5451122c4a90c7dd0c6d7e2609b42e5d15c94833346ac41895d1a5f78c05148bc8ca3699e571451a84efa365da17bbf6e3380#npm:5.4.2"],\
             ["@mui/material", "virtual:cfc3bdaab13e57dc6a358dda48c5451122c4a90c7dd0c6d7e2609b42e5d15c94833346ac41895d1a5f78c05148bc8ca3699e571451a84efa365da17bbf6e3380#npm:5.4.3"],\
             ["@yarnpkg/pnpify", "npm:3.1.1"],\
+            ["axios", "npm:0.26.0"],\
             ["babel-loader", "virtual:cfc3bdaab13e57dc6a358dda48c5451122c4a90c7dd0c6d7e2609b42e5d15c94833346ac41895d1a5f78c05148bc8ca3699e571451a84efa365da17bbf6e3380#npm:8.2.3"],\
             ["css-loader", "virtual:cfc3bdaab13e57dc6a358dda48c5451122c4a90c7dd0c6d7e2609b42e5d15c94833346ac41895d1a5f78c05148bc8ca3699e571451a84efa365da17bbf6e3380#npm:6.6.0"],\
             ["eslint-config-prettier", "virtual:cfc3bdaab13e57dc6a358dda48c5451122c4a90c7dd0c6d7e2609b42e5d15c94833346ac41895d1a5f78c05148bc8ca3699e571451a84efa365da17bbf6e3380#npm:8.4.0"],\
