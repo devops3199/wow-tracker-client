@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAuth } from '../../libs';
+import { Link } from 'react-router-dom';
 import { Box, AppBar, Toolbar, IconButton, Typography, Button } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
@@ -24,9 +25,16 @@ function Navbar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Tracker
           </Typography>
-          <Button color="inherit" onClick={handleLogin}>
-            배틀넷 로그인
-          </Button>
+          {currentUser ? (
+            <>
+              <Typography variant="caption">환영합니다! {currentUser?.battleTag}</Typography>
+              <Button color="inherit">로그아웃</Button>
+            </>
+          ) : (
+            <Button color="inherit" onClick={handleLogin}>
+              배틀넷 로그인
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </Box>
