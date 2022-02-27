@@ -1,55 +1,35 @@
 {
-  "name": "wow-tracker",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@types/jest": "^26.0.15",
-    "@types/node": "^12.0.0",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
-    "@types/react-router-dom": "^5.1.7",
-    "@types/styled-components": "^5.1.9",
-    "axios": "^0.24.0",
-    "chart.js": "^3.3.0",
-    "firebase": "^8.6.1",
-    "moment": "^2.29.1",
-    "react": "^17.0.2",
-    "react-chartjs-2": "^3.0.3",
-    "react-dom": "^17.0.2",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
-    "styled-components": "^5.3.0",
-    "typescript": "^4.1.2",
-    "web-vitals": "^1.0.1"
-  },
+  "name": "wow-tracker-client",
+  "packageManager": "yarn@3.2.0",
+  "author": "Chanyeop Jeong",
+  "license": "ISC",
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build": "webpack --mode production",
+    "start": "webpack serve --mode development",
+    "start:dev": "webpack serve --mode development"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "@types/passport-bnet": "^2.0.1"
+    "@babel/core": "^7.17.5",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "@yarnpkg/pnpify": "^3.1.1",
+    "babel-loader": "^8.2.3",
+    "css-loader": "^6.6.0",
+    "eslint-config-prettier": "^8.4.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "prettier": "^2.5.1",
+    "style-loader": "^3.3.1",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.5",
+    "webpack": "^5.69.1",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
   }
 }
