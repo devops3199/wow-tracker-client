@@ -12,6 +12,7 @@ class HttpClient {
   constructor() {
     this.httpInstance = axios.create({
       baseURL: API_URL,
+      withCredentials: true,
     });
 
     this.authorization = '';

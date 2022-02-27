@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { ReactNode, createContext, useState, useEffect, useContext } from 'react';
 import { httpClient } from '..';
 
 type User = {
@@ -7,12 +7,19 @@ type User = {
   battleTag: string;
 };
 
-const AuthContext = createContext<{ currentUser: User | undefined}>({ currentUser: undefined });
+const AuthContext = createContext<{ currentUser: User | undefined }>({ currentUser: undefined });
 
-function AuthProvider({ children }: { children?: React.ReactNode }) {
+function useAuth() {
+  return useContext(AuthContext);
+}
+
+function AuthProvider({ children }: { children: ReactNode }) {
+  // custom hooks
+  // state
   const [currentUser, setCurrentUser] = useState<User>();
   const [loading, setLoading] = useState(false);
 
+  // effect
   useEffect(() => {
     async function init() {
       setLoading(true);
@@ -23,11 +30,9 @@ function AuthProvider({ children }: { children?: React.ReactNode }) {
     init();
   }, []);
 
-  return (
-    <AuthContext value={{ currentUser }}>
-      {!loading && children}
-    </AuthContext>
-  )
+  // handler
+
+  return <AuthContext.Provider value={{ currentUser }}>{!loading && children}</AuthContext.Provider>;
 }
 
-export { AuthProvider };
+export { AuthProvider, useAuth };
