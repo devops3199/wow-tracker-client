@@ -1,5 +1,6 @@
 import React from 'react';
-import { Stack, Typography as Text } from '@mui/material';
+import { Layout } from '../../components';
+import { Box, Toolbar, Typography as Text } from '@mui/material';
 
 function NotFound() {
   // custom hooks
@@ -8,10 +9,13 @@ function NotFound() {
   // handler
 
   return (
-    <Stack width="100%" justifyContent="center" alignItems="center">
-      <Text variant="h4">404</Text>
-      <Text variant="subtitle1">Not Found</Text>
-    </Stack>
+    <Layout>
+      <Box component="div" sx={{ flexGrow: 1, p: 3 }}>
+        <Toolbar />
+        <Text variant="h4">404</Text>
+        <Text variant="subtitle1">Not Found</Text>
+      </Box>
+    </Layout>
   );
 }
 

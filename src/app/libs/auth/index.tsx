@@ -24,7 +24,9 @@ function AuthProvider({ children }: { children: ReactNode }) {
     async function init() {
       setLoading(true);
       const user = await httpClient.get<{ id: number; token: string; battleTag: string }>('/api/auth/success');
-      setCurrentUser(user);
+      if (user) {
+        setCurrentUser(user);
+      }
       setLoading(false);
     }
     init();

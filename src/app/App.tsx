@@ -1,23 +1,27 @@
 import React from 'react';
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './libs';
 import { Box } from '@mui/material';
-import { Navbar } from './components';
-import { Main, NotFound } from './screens';
+import { Main, Characters, NotFound } from './screens';
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <AuthProvider>
-      <Box>
-        <Router>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Router>
-      </Box>
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <Box>
+          <Router>
+            <Routes>
+              <Route path="/" element={<Main />} />
+              <Route path="/characters" element={<Characters />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Router>
+        </Box>
+      </AuthProvider>
+    </QueryClientProvider>
   );
 }
 

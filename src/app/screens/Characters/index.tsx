@@ -1,29 +1,28 @@
 import React from 'react';
+import { useQuery } from 'react-query';
 import { useAuth } from '../../libs';
 import { httpClient } from '../../libs';
 import { Layout } from '../../components';
 import { Box, Typography as Text, Toolbar } from '@mui/material';
 
-function Main() {
+function Characters() {
   // custom hooks
   const { currentUser } = useAuth();
 
   // state
+  // query
+  const { data: characters, isLoading } = useQuery<any>(['characters'], () => httpClient.get('/api/bnet/profile'));
+
   // effect
   // handler
-  const handleUserWow = async () => {
-    const test = await httpClient.get('/api/bnet/profile');
-    console.log(test);
-  };
-
   return (
     <Layout>
       <Box component="div" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
-        {currentUser ? <Text variant="h3">로그인 완료</Text> : <Text variant="h3">배틀넷 계정으로 로그인 필요</Text>}
+        {isLoading ? <Text>Loading...</Text> : characters.wow_accounts.toString()}
       </Box>
     </Layout>
   );
 }
 
-export { Main };
+export { Characters };

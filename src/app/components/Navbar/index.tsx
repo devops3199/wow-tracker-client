@@ -1,7 +1,8 @@
 import React from 'react';
 import { useAuth } from '../../libs';
-import { Box, AppBar, Toolbar, IconButton, Typography, Button } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+import { Box, AppBar, Toolbar, Typography, Button } from '@mui/material';
+
+const PAGES = ['Characters'];
 
 function Navbar() {
   // custom hooks
@@ -16,13 +17,10 @@ function Navbar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <Toolbar>
-          <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
-            <MenuIcon />
-          </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Tracker
+            WoW Tracker
           </Typography>
           {currentUser ? (
             <>
