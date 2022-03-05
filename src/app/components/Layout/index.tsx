@@ -1,14 +1,16 @@
 import React, { ReactNode } from 'react';
-import { Box } from '@mui/material';
+import { Stack } from '@mui/material';
 import { Navbar, ClippedDrawer } from '..';
 
 function Layout({ children }: { children: ReactNode }) {
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Stack width="100%" height="100%">
       <Navbar />
-      <ClippedDrawer />
-      {children}
-    </Box>
+      <Stack flexDirection="row">
+        <ClippedDrawer />
+        {children}
+      </Stack>
+    </Stack>
   );
 }
 
