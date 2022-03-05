@@ -55,7 +55,7 @@ function Characters() {
             characters?.wow_accounts.map((account) => {
               return account.characters.map((character) => {
                 return (
-                  <Card sx={{ margin: 1, width: '250px', height: '100%' }}>
+                  <Card key={character.id.toString()} sx={{ margin: 1, width: '250px', height: '100%' }}>
                     <CardContent>
                       <Text>{`서버: ${character.realm.name.ko_KR}`}</Text>
                       <Text>{`캐릭터: ${character.name}`}</Text>
