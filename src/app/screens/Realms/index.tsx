@@ -41,23 +41,21 @@ function Realms() {
           {isLoading ? (
             <Text>Loading...</Text>
           ) : (
-            realms?.map((server) => {
-              return (
-                <Card key={server.id.toString()} sx={{ margin: 1, flex: 'auto', height: '300px' }}>
-                  <CardContent>
-                    <Text variant="h4">{server.population.name.ko_KR}</Text>
-                    <Text variant="h6">{server.has_queue ? '대기 필요' : '대기 없음'}</Text>
-                    {server.realms.map((realm) => {
-                      return (
-                        <Text key={realm.id.toString()} variant="subtitle2">
-                          {`${realm.name.ko_KR} (${realm.name.en_US})`}
-                        </Text>
-                      );
-                    })}
-                  </CardContent>
-                </Card>
-              );
-            })
+            realms?.map((server) => (
+              <Card key={server.id.toString()} sx={{ margin: 1, flex: 'auto', height: '300px' }}>
+                <CardContent>
+                  <Text variant="h4">{server.population.name.ko_KR}</Text>
+                  <Text variant="h6">{server.has_queue ? '대기 필요' : '대기 없음'}</Text>
+                  {server.realms.map((realm) => {
+                    return (
+                      <Text key={realm.id.toString()} variant="subtitle2">
+                        {`${realm.name.ko_KR} (${realm.name.en_US})`}
+                      </Text>
+                    );
+                  })}
+                </CardContent>
+              </Card>
+            ))
           )}
         </Stack>
       </Box>
