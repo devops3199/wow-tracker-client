@@ -9,50 +9,47 @@ type Name = {
   ko_KR: string;
 };
 
-type Characters = {
-  wow_accounts: {
-    characters: {
-      id: number;
-      name: string;
-      realm: {
-        name: Name;
-        slug: string;
-      };
-      playable_class: {
-        name: Name;
-      };
-      playable_race: {
-        name: Name;
-      };
-      gender: {
-        name: Name;
-      };
-      faction: {
-        name: Name;
-      };
-      level: number;
-    }[];
+type CharactersByAccounts = {
+  id: number;
+  characters: {
+    id: number;
+    name: string;
+    realm: {
+      name: Name;
+      slug: string;
+    };
+    playable_class: {
+      name: Name;
+    };
+    playable_race: {
+      name: Name;
+    };
+    gender: {
+      name: Name;
+    };
+    faction: {
+      name: Name;
+    };
+    level: number;
   }[];
-};
+}[];
 
 function Characters() {
   // custom hooks
   // state
   // query
-  const { data: characters, isLoading } = useQuery(['characters'], () =>
-    httpClient.get<Characters>('/api/bnet/profile'),
-  );
+  const { data, isLoading } = useQuery(['characters'], () => httpClient.get<CharactersByAccounts>('/api/bnet/profile'));
 
   // effect
   // handler
   return (
     <Layout>
-      <Box component="div" sx={{ flexGrow: 1, p: 1 }}>
+      <Box sx={{ flexGrow: 1, p: 1 }}>
         <Stack flexDirection="row" flexWrap="wrap" justifyContent="flex-start">
           {isLoading ? (
             <Text>Loading...</Text>
           ) : (
-            characters?.wow_accounts.map((account) =>
+            data?.map((account) =>
               account.characters.map((character) => (
                 <Card key={character.id.toString()} sx={{ margin: 1, width: '250px', height: '100%' }}>
                   <CardContent>
