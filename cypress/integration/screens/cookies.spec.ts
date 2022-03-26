@@ -5,6 +5,11 @@ context('Mocking Cookies', () => {
       'tracker',
       'eyJwYXNzcG9ydCI6eyJ1c2VyIjo3MDQyMjI5NDZ9LCJfZXhwaXJlIjoxNjQ4MjYwNDE5ODMzLCJfbWF4QWdlIjozNjAwMDAwfQ==',
     );
+
+    cy.intercept('GET', 'http://localhost:4000/api/auth/success', {
+      statusCode: 200,
+      body: { data: { id: '1', token: 'token', battleTag: 'KodePaper#1234' } },
+    });
   });
 
   it('Login success w/ mocked cookies', () => {
