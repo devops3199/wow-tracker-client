@@ -1,15 +1,15 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { httpClient } from '../../libs';
-import { Layout } from '../../components';
-import { Box, Stack, Card, CardContent, CardActions, Typography as Text, Button } from '@mui/material';
+import { Layout, RealmCard } from '../../components';
+import { Box, Stack, Card, CardContent, Typography as Text } from '@mui/material';
 
 type Name = {
   en_US: string;
   ko_KR: string;
 };
 
-type Realm = {
+type UnitedRealm = {
   has_queue: boolean;
   id: number;
   population: {
@@ -30,7 +30,9 @@ function Realms() {
   // custom hooks
   // state
   // query
-  const { data: realms, isLoading } = useQuery(['realms'], () => httpClient.get<Realm[]>('/api/bnet/realms'));
+  const { data: unitedRealms, isLoading } = useQuery(['realms'], () =>
+    httpClient.get<UnitedRealm[]>('/api/bnet/realms'),
+  );
 
   // effect
   // handler
@@ -41,21 +43,7 @@ function Realms() {
           {isLoading ? (
             <Text>Loading...</Text>
           ) : (
-            realms?.map((server) => (
-              <Card key={server.id.toString()} sx={{ margin: 1, flex: 'auto', height: '300px' }}>
-                <CardContent>
-                  <Text variant="h4">{server.population.name.ko_KR}</Text>
-                  <Text variant="h6">{server.has_queue ? '대기 필요' : '대기 없음'}</Text>
-                  {server.realms.map((realm) => {
-                    return (
-                      <Text key={realm.id.toString()} variant="subtitle2">
-                        {`${realm.name.ko_KR} (${realm.name.en_US})`}
-                      </Text>
-                    );
-                  })}
-                </CardContent>
-              </Card>
-            ))
+            unitedRealms?.map((unitedRealm) => <RealmCard unitedRealm={unitedRealm} />)
           )}
         </Stack>
       </Box>
