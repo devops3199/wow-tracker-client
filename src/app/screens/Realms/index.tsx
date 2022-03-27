@@ -2,29 +2,7 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { httpClient } from '../../libs';
 import { Layout, RealmCard } from '../../components';
-import { Box, Stack, Card, CardContent, Typography as Text } from '@mui/material';
-
-type Name = {
-  en_US: string;
-  ko_KR: string;
-};
-
-type UnitedRealm = {
-  has_queue: boolean;
-  id: number;
-  population: {
-    name: Name;
-  };
-  realms: {
-    id: number;
-    name: Name;
-    slug: string;
-    timezone: string;
-    type: {
-      name: Name;
-    };
-  }[];
-};
+import { Box, Stack, Typography as Text } from '@mui/material';
 
 function Realms() {
   // custom hooks

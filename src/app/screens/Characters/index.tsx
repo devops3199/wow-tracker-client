@@ -2,37 +2,7 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { httpClient } from '../../libs';
 import { Layout, CharacterCard } from '../../components';
-import { Box, Stack, Card, CardContent, CardActions, Typography as Text, Button } from '@mui/material';
-
-type Name = {
-  en_US: string;
-  ko_KR: string;
-};
-
-type CharactersByAccounts = {
-  id: number;
-  characters: {
-    id: number;
-    name: string;
-    realm: {
-      name: Name;
-      slug: string;
-    };
-    playable_class: {
-      name: Name;
-    };
-    playable_race: {
-      name: Name;
-    };
-    gender: {
-      name: Name;
-    };
-    faction: {
-      name: Name;
-    };
-    level: number;
-  }[];
-}[];
+import { Box, Stack, Typography as Text } from '@mui/material';
 
 function Characters() {
   // custom hooks
