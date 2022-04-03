@@ -23,7 +23,14 @@ function Navbar() {
         {currentUser ? (
           <>
             <Text variant="caption">환영합니다! {currentUser?.battleTag}</Text>
-            <Button color="inherit">로그아웃</Button>
+            <Button
+              color="inherit"
+              onClick={() => {
+                // TODO: httpOnly Cookie. The job must be done from server
+              }}
+            >
+              로그아웃
+            </Button>
           </>
         ) : (
           <Button color="inherit" onClick={handleLogin}>
