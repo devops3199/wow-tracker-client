@@ -1,33 +1,6 @@
 import React from 'react';
 import { Card, CardContent, CardActions, Button, Typography as Text } from '@mui/material';
 
-type Name = {
-  en_US: string;
-  ko_KR: string;
-};
-
-type Character = {
-  id: number;
-  name: string;
-  realm: {
-    name: Name;
-    slug: string;
-  };
-  playable_class: {
-    name: Name;
-  };
-  playable_race: {
-    name: Name;
-  };
-  gender: {
-    name: Name;
-  };
-  faction: {
-    name: Name;
-  };
-  level: number;
-};
-
 function CharacterCard(props: { character: Character }) {
   const { character } = props;
 
