@@ -5,10 +5,10 @@ WORKDIR /usr/src/app
 
 COPY ./package.json ./
 
-RUN yarn
+RUN npm install
 
 COPY ./ ./
 
 # 실행
 EXPOSE 3000
-CMD ["yarn", "start"]
+CMD ["npm", "start"]
