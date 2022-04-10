@@ -1,13 +1,20 @@
 import React from 'react';
-import { useAuth } from '../../libs';
+import { useMutation } from 'react-query';
+import { useAuth, useLogout, httpClient } from '../../libs';
 import { Link, AppBar, Toolbar, Typography as Text, Button } from '@mui/material';
 import { Link as ReactLink } from 'react-router-dom';
 
 function Navbar() {
   // custom hooks
   const { currentUser } = useAuth();
+  const logout = useLogout();
 
   // state
+  // query
+  const { mutate } = useMutation(['logout'], () => httpClient.post<void>('/api/auth/logout', {}), {
+    onSuccess: () => logout(),
+  });
+
   // effect
   // handler
   const handleLogin = () => {
@@ -23,12 +30,7 @@ function Navbar() {
         {currentUser ? (
           <>
             <Text variant="caption">환영합니다! {currentUser?.battleTag}</Text>
-            <Button
-              color="inherit"
-              onClick={() => {
-                // TODO: httpOnly Cookie. The job must be done from server
-              }}
-            >
+            <Button color="inherit" onClick={() => mutate()}>
               로그아웃
             </Button>
           </>

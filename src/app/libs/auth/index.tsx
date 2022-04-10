@@ -1,4 +1,5 @@
-import React, { ReactNode, createContext, useState, useEffect, useContext } from 'react';
+import React, { ReactNode, createContext, useState, useEffect, useContext, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { httpClient } from '..';
 
 type User = {
@@ -7,7 +8,10 @@ type User = {
   battleTag: string;
 };
 
-const AuthContext = createContext<{ currentUser: User | undefined }>({ currentUser: undefined });
+const AuthContext = createContext<{ currentUser: User | undefined; setCurrentUser: (user: User | undefined) => void }>({
+  currentUser: undefined,
+  setCurrentUser: () => ({}),
+});
 
 function useAuth() {
   return useContext(AuthContext);
@@ -34,7 +38,17 @@ function AuthProvider({ children }: { children: ReactNode }) {
 
   // handler
 
-  return <AuthContext.Provider value={{ currentUser }}>{!loading && children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ currentUser, setCurrentUser }}>{!loading && children}</AuthContext.Provider>;
 }
 
-export { AuthProvider, useAuth };
+function useLogout() {
+  const navigate = useNavigate();
+  const context = useContext(AuthContext);
+
+  return useCallback(() => {
+    context.setCurrentUser(undefined);
+    navigate('/');
+  }, [context, navigate]);
+}
+
+export { AuthProvider, useAuth, useLogout };
