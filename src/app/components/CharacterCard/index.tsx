@@ -1,7 +1,11 @@
 import React from 'react';
-import { Card, CardContent, Typography as Text } from '@mui/material';
+import { Card, CardContent, Typography, styled } from '@mui/material';
 import Alliance from '../../../assets/images/alliance.png';
 import Horde from '../../../assets/images/horde.png';
+
+const Text = styled(Typography)({
+  textShadow: '-1px 0 white, 0 1px white, 1px 0 white, 0 -1px white',
+});
 
 const factionMap = {
   Alliance,
