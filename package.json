@@ -7,7 +7,6 @@
   "scripts": {
     "build": "webpack --mode production",
     "start": "webpack serve --mode development",
-    "start:dev": "webpack serve --mode development",
     "cypress": "cypress open"
   },
   "dependencies": {
